@@ -40,6 +40,8 @@ type Props<T extends Route> = {
   onLongPress: () => void;
   labelStyle?: StyleProp<TextStyle>;
   style: StyleProp<ViewStyle>;
+  tabContainer?: Element;
+  customTabContainerStyle?: StyleProp<ViewStyle>;
 };
 
 const DEFAULT_ACTIVE_COLOR = 'rgba(255, 255, 255, 1)';
@@ -97,6 +99,8 @@ export default class TabBarItem<T extends Route> extends React.Component<
       onLayout,
       onPress,
       onLongPress,
+      tabContainer,
+      customTabContainerStyle,
     } = this.props;
 
     const tabIndex = navigationState.routes.indexOf(route);
@@ -208,9 +212,10 @@ export default class TabBarItem<T extends Route> extends React.Component<
         : getLabelText(scene);
 
     const badge = renderBadge ? renderBadge(scene) : null;
+    const TouchElement = tabContainer ? tabContainer : TouchableItem;
 
     return (
-      <TouchableItem
+      <TouchElement
         borderless
         testID={getTestID(scene)}
         accessible={getAccessible(scene)}
@@ -225,14 +230,14 @@ export default class TabBarItem<T extends Route> extends React.Component<
         onLayout={onLayout}
         onPress={onPress}
         onLongPress={onLongPress}
-        style={tabContainerStyle}
+        style={customTabContainerStyle ? customTabContainerStyle : tabContainerStyle}
       >
         <View pointerEvents="none" style={[styles.item, tabStyle]}>
           {icon}
           {label}
           {badge != null ? <View style={styles.badge}>{badge}</View> : null}
         </View>
-      </TouchableItem>
+      </TouchElement>
     );
   }
 }
