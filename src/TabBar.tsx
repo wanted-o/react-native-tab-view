@@ -324,6 +324,8 @@ export default class TabBar<T extends Route> extends React.Component<
       contentContainerStyle,
       style,
       indicatorContainerStyle,
+      tabContainer,
+      customTabContainerStyle,
     } = this.props;
     const { layout, tabWidths } = this.state;
     const { routes } = navigationState;
@@ -425,6 +427,8 @@ export default class TabBar<T extends Route> extends React.Component<
                       }
                     : undefined
                 }
+                tabContainer={tabContainer}
+                customTabContainerStyle={customTabContainerStyle}
                 key={route.key}
                 position={position}
                 route={route}
