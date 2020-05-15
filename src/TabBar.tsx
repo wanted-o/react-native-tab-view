@@ -57,6 +57,8 @@ export type Props<T extends Route> = SceneRendererProps & {
   labelStyle?: StyleProp<TextStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
+  tabContainer?: Element;
+  customTabContainerStyle?: StyleProp<ViewStyle>;
 };
 
 type State = {
